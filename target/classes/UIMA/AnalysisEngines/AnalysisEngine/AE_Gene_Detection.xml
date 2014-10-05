@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+	<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+	<primitive>true</primitive>
+	<annotatorImplementationName>services.uima.annotators.GeneParsingAnnotator</annotatorImplementationName>
+	<analysisEngineMetaData>
+		<name>AnalysisEngineDescriptor</name>
+		<description/>
+		<version>1.0</version>
+		<vendor/>
+		<configurationParameters searchStrategy="language_fallback">
+      <configurationParameter>
+        <name>Dictionary</name>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+    </configurationParameters>
+		<configurationParameterSettings>
+      <nameValuePair>
+        <name>Dictionary</name>
+        <value>
+          <string>/data/zipedGeneNames</string>
+        </value>
+      </nameValuePair>
+    </configurationParameterSettings>
+		<typeSystemDescription>
+      <imports>
+        <import name="UIMA.types"/>
+      </imports>
+    </typeSystemDescription>
+		<typePriorities/>
+		<fsIndexCollection/>
+		<capabilities>
+			<capability>
+				<inputs>
+          <type allAnnotatorFeatures="true">services.types.DocumentContent</type>
+        <type allAnnotatorFeatures="true">services.types.NounPhrase</type>
+        </inputs>
+				<outputs>
+          <type allAnnotatorFeatures="true">services.types.GeneName</type>
+        </outputs>
+				<languagesSupported/>
+			</capability>
+		</capabilities>
+		<operationalProperties>
+			<modifiesCas>true</modifiesCas>
+			<multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+			<outputsNewCASes>false</outputsNewCASes>
+		</operationalProperties>
+	</analysisEngineMetaData>
+	<resourceManagerConfiguration/>
+</analysisEngineDescription>
