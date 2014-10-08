@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+	<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+	<primitive>false</primitive>
+	<delegateAnalysisEngineSpecifiers>
+	
+		<delegateAnalysisEngine key="AE_Abner_none_tokenize">
+			<import name="UIMA.AnalysisEngines.AnalysisEngine.Abner.AE_Abner_none_tokenize"/>
+    </delegateAnalysisEngine>
+		<delegateAnalysisEngine key="AE_Abner_creative">
+      <import name="UIMA.AnalysisEngines.AnalysisEngine.Abner.AE_Abner_creative"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="AE_Abner_normal">
+      <import name="UIMA.AnalysisEngines.AnalysisEngine.Abner.AE_Abner_normal"/>
+    </delegateAnalysisEngine>
+  <delegateAnalysisEngine key="AE_Abner_tokenize">
+      <import name="UIMA.AnalysisEngines.AnalysisEngine.abner.AE_Abner_tokenize"/>
+    </delegateAnalysisEngine>
+  </delegateAnalysisEngineSpecifiers>
+	<analysisEngineMetaData>
+		<name>AnalysisEngineDescriptor</name>
+		<description/>
+		<version>1.0</version>
+		<vendor/>
+		<configurationParameters searchStrategy="language_fallback"/>
+		<configurationParameterSettings/>
+		<flowConstraints>
+			<fixedFlow>
+
+        <node>AE_Abner_tokenize</node>
+        <node>AE_Abner_none_tokenize</node>
+        <node>AE_Abner_creative</node>
+      <node>AE_Abner_normal</node>
+      </fixedFlow>
+    </flowConstraints>
+		<typePriorities/>
+    <fsIndexCollection/>
+		<capabilities>
+			<capability>
+				<inputs/>
+				<outputs>
+          <type allAnnotatorFeatures="true">services.uima.types.GeneName</type>
+        </outputs>
+				<languagesSupported/>
+			</capability>
+		</capabilities>
+		<operationalProperties>
+			<modifiesCas>true</modifiesCas>
+			<multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+			<outputsNewCASes>false</outputsNewCASes>
+		</operationalProperties>
+	</analysisEngineMetaData>
+	<resourceManagerConfiguration/>
+</analysisEngineDescription>
