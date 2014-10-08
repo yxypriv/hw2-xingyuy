@@ -5,6 +5,10 @@
 	<groupId>edu.cmu.lti.11791.f14.hw2</groupId>
 	<artifactId>hw2-xingyuy</artifactId>
 	<version>1.0-SNAPSHOT</version>
+	<scm>
+		<connection>scm:git:git@github.com:yxypriv/hw2-xingyuy.git</connection>
+		<developerConnection>scm:git:git@github.com:yxypriv/hw2-xingyuy.git</developerConnection>
+	</scm>
 	<repositories>
 		<repository>
 			<id>oaqa</id>
