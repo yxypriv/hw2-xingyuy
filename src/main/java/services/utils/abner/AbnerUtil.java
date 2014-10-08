@@ -6,11 +6,18 @@ import java.util.List;
 import org.apache.uima.jcas.JCas;
 
 import services.uima.types.GeneName;
-import services.utils.EnumerationUtils;
+
+/**
+ * Tokenized annotator will come back with tokenized gene name and don't have
+ * the start and end point, this is a util class to take raw abner result and do
+ * the annotations for abner.
+ * 
+ * @author Xingyu Yan
+ */
 
 public class AbnerUtil {
 	public static void annotateTokenizedGene(JCas aJCas, String originalContent, String tokenizedContent, //
-			String[][] entities, int annotatorId) {
+					String[][] entities, int annotatorId) {
 		int compareStart = 0;
 		if (entities.length > 0) {
 			List<AbnerGeneTag> currentEntities = new ArrayList<AbnerGeneTag>();

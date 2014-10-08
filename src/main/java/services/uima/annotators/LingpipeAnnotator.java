@@ -19,9 +19,8 @@ import com.aliasi.chunk.Chunking;
 import com.aliasi.util.AbstractExternalizable;
 
 /**
- * Using gene dictionary generated from http://www.ncbi.nlm.nih.gov/gene Using
- * trie tree to save it and compare in the noun phases parts of the sentence.
- * 
+ * Lingpipe Annotator.
+ *  
  * @author Xingyu
  * 
  */

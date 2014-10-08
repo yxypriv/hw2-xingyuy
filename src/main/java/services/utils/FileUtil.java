@@ -7,7 +7,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
-
+/**
+ * A tool class for more easy reading files and process.
+ * 
+ * @author Xingyu Yan
+ *
+ */
 public class FileUtil {
 	public static interface FileLineProcess {
 		public void process(String line);

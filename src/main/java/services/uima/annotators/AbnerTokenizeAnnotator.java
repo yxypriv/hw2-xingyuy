@@ -10,8 +10,8 @@ import services.uima.types.abnor.TokenizedContent;
 import abner.Tagger;
 
 /**
- * Using gene dictionary generated from http://www.ncbi.nlm.nih.gov/gene Using
- * trie tree to save it and compare in the noun phases parts of the sentence.
+ * A pre-run class, functioning tokenize original data and feed other Abner
+ * Annotator so that in this program tokenize only need to be run once.
  * 
  * @author Xingyu
  * 
@@ -19,7 +19,8 @@ import abner.Tagger;
 public class AbnerTokenizeAnnotator extends JCasAnnotator_ImplBase {
 	static Tagger tagger = null;
 	private int processed;
-//	int 
+
+	// int
 	@Override
 	public void initialize(UimaContext aContext) throws ResourceInitializationException {
 		if (null == tagger)
@@ -28,11 +29,11 @@ public class AbnerTokenizeAnnotator extends JCasAnnotator_ImplBase {
 
 	@Override
 	public void process(JCas aJCas) throws AnalysisEngineProcessException {
-//		System.out.println("[ATA]");
-		if(++processed % 500 == 0) {
+		// System.out.println("[ATA]");
+		if (++processed % 500 == 0) {
 			System.out.println(String.format("[Abnor][TOKENIZE][processing]%d", processed));
 		}
-		
+
 		String content = aJCas.getDocumentText();
 		TokenizedContent tc = new TokenizedContent(aJCas);
 		tc.setBegin(-1);
@@ -46,5 +47,5 @@ public class AbnerTokenizeAnnotator extends JCasAnnotator_ImplBase {
 		System.out.println(String.format("[Abnor][Creative][FINISHED]"));
 		super.destroy();
 	}
-	
+
 }

@@ -21,6 +21,7 @@ import services.uima.types.DocumentKey;
 
 /**
  * read from <b>InputFile</b>, save in document text
+ * Homework2 update: do the first step split and also save key Annotation.
  * 
  * @author Xingyu
  *

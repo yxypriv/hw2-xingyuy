@@ -14,8 +14,7 @@ import services.utils.abner.AbnerUtil;
 import abner.Tagger;
 
 /**
- * Using gene dictionary generated from http://www.ncbi.nlm.nih.gov/gene Using
- * trie tree to save it and compare in the noun phases parts of the sentence.
+ * An Abner Annotator. Loading tokenized data and using bio_creative library
  * 
  * @author Xingyu
  * 

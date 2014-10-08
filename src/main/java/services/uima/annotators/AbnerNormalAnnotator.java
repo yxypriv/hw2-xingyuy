@@ -17,8 +17,8 @@ import services.utils.abner.AbnerUtil;
 import abner.Tagger;
 
 /**
- * Using gene dictionary generated from http://www.ncbi.nlm.nih.gov/gene Using
- * trie tree to save it and compare in the noun phases parts of the sentence.
+ * An abner Annotator, using default configuation which is using NLPBA lib and
+ * tokenized data.
  * 
  * @author Xingyu
  * 
@@ -42,7 +42,7 @@ public class AbnerNormalAnnotator extends JCasAnnotator_ImplBase {
 
 	@Override
 	public void process(JCas aJCas) throws AnalysisEngineProcessException {
-//		System.out.println("[ANA]");
+		// System.out.println("[ANA]");
 		if (++processed % 500 == 0) {
 			System.out.println(String.format("[Abnor][Normal][processing]%d", processed));
 		}
@@ -55,7 +55,8 @@ public class AbnerNormalAnnotator extends JCasAnnotator_ImplBase {
 		}
 		String[][] entities = tagger.getEntities(tContent);
 
-		AbnerUtil.annotateTokenizedGene(aJCas, oContent, tContent, entities, EnumerationUtils.AnnotatorType.ABNER_NORMAL);
+		AbnerUtil.annotateTokenizedGene(aJCas, oContent, tContent, entities,
+						EnumerationUtils.AnnotatorType.ABNER_NORMAL);
 	}
 
 	@Override
