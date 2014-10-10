@@ -11,6 +11,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import services.uima.types.GeneName;
+import services.utils.AnnotatingUtil;
 import services.utils.EnumerationUtils;
 
 import com.aliasi.chunk.Chunk;
@@ -20,7 +21,7 @@ import com.aliasi.util.AbstractExternalizable;
 
 /**
  * Lingpipe Annotator.
- *  
+ * 
  * @author Xingyu
  * 
  */
@@ -36,12 +37,14 @@ public class LingpipeAnnotator extends JCasAnnotator_ImplBase {
 			System.err.println("Lingpipe configuaration error: no model path detected.");
 		}
 
-		System.out.println(configParameterValue);
-		URL resource = LingpipeAnnotator.class.getClassLoader().getResource((String) configParameterValue);
-		File modelFile = new File(resource.getFile());
+		// System.out.println(configParameterValue);
+		// URL resource =
+		// LingpipeAnnotator.class.getClassLoader().getResource((String)
+		// configParameterValue);
+		// File modelFile = new File(resource.getFile());
 
 		try {
-			chunker = (Chunker) AbstractExternalizable.readObject(modelFile);
+			chunker = (Chunker) AbstractExternalizable.readResourceObject((String) configParameterValue);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -51,7 +54,7 @@ public class LingpipeAnnotator extends JCasAnnotator_ImplBase {
 
 	@Override
 	public void process(JCas aJCas) throws AnalysisEngineProcessException {
-//		System.out.println("[LA]");
+		// System.out.println("[LA]");
 		if (++processed % 500 == 0) {
 			System.out.println(String.format("[Lingpipe][processing]%d", processed));
 		}
@@ -60,7 +63,7 @@ public class LingpipeAnnotator extends JCasAnnotator_ImplBase {
 		for (Chunk c : chunking.chunkSet()) {
 			int start = c.start();
 			int end = c.end();
-			annotateGene(aJCas, start, end, content.substring(start, end));
+			AnnotatingUtil.annotateGene(aJCas, start, end, content, EnumerationUtils.AnnotatorType.LINGPIPE_ANNOTATOR);
 		}
 	}
 
@@ -69,14 +72,4 @@ public class LingpipeAnnotator extends JCasAnnotator_ImplBase {
 		System.out.println(String.format("[LINGPIPE][FINISHED]"));
 		super.destroy();
 	}
-
-	private void annotateGene(JCas aJcas, int start, int end, String content) {
-		GeneName gene = new GeneName(aJcas);
-		gene.setBegin(start);
-		gene.setEnd(end);
-		gene.setName(content);
-		gene.setAnnotatorId(EnumerationUtils.AnnotatorType.LINGPIPE_ANNOTATOR);
-		gene.addToIndexes();
-	}
-
 }

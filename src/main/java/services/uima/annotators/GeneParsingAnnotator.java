@@ -16,6 +16,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import edu.stanford.nlp.trees.Tree;
 import services.uima.types.GeneName;
 import services.uima.types.NounPhrase;
+import services.utils.AnnotatingUtil;
 import services.utils.EnumerationUtils;
 import services.utils.trieTree.TrieTreeHandle;
 import services.utils.trieTree.TrieTreeNode;
@@ -36,9 +37,10 @@ public class GeneParsingAnnotator extends JCasAnnotator_ImplBase {
 	@Override
 	public void initialize(UimaContext aContext) throws ResourceInitializationException {
 		String dictionaryPath = (String) aContext.getConfigParameterValue(RES_GENE_DICT);
-		URL resource = GeneParsingAnnotator.class.getResource(dictionaryPath);
-		geneNameHandle = TrieTreeHandle.getInstance(resource.getFile());
-//		geneNameHandle.buildTrieTree(new File(resource.getFile()));
+		// URL resource =
+		// GeneParsingAnnotator.class.getResource(dictionaryPath);
+		geneNameHandle = TrieTreeHandle.getInstance(GeneParsingAnnotator.class.getClassLoader().getResourceAsStream(dictionaryPath), dictionaryPath);
+		// geneNameHandle.buildTrieTree(new File(resource.getFile()));
 
 		char[] validCharArray = " /()[]{}#".toCharArray();
 		validStopCharSet = new HashSet<Character>();
@@ -51,7 +53,7 @@ public class GeneParsingAnnotator extends JCasAnnotator_ImplBase {
 
 	@Override
 	public void process(JCas aJCas) throws AnalysisEngineProcessException {
-//		System.out.println("[GP]");
+		// System.out.println("[GP]");
 		TrieTreeNode root = geneNameHandle.getRoot();
 		String content = aJCas.getDocumentText();
 
@@ -84,7 +86,7 @@ public class GeneParsingAnnotator extends JCasAnnotator_ImplBase {
 						}
 						if (k == contentArray.length || validStopCharSet.contains(contentArray[k])) {
 							if (currentNode.isNumberLengthInRange(numberSuffixLength)) {
-								annotateGene(aJCas, i, j + numberSuffixLength + 1, content.substring(i, j + numberSuffixLength + 1));
+								annotateGene(aJCas, i, j + numberSuffixLength + 1, content);
 								break;
 							}
 						}
@@ -92,7 +94,7 @@ public class GeneParsingAnnotator extends JCasAnnotator_ImplBase {
 					if (j == contentArray.length - 1 || validStopCharSet.contains(contentArray[j])) {
 						if (currentNode.stopable) {
 							// i to j is a gene name
-							annotateGene(aJCas, i, j, content.substring(i, j));
+							annotateGene(aJCas, i, j, content);
 							break;
 						}
 					}
@@ -113,11 +115,6 @@ public class GeneParsingAnnotator extends JCasAnnotator_ImplBase {
 	}
 
 	private void annotateGene(JCas aJcas, int start, int end, String content) {
-		GeneName gene = new GeneName(aJcas);
-		gene.setBegin(start);
-		gene.setEnd(end);
-		gene.setName(content);
-		gene.setAnnotatorId(EnumerationUtils.AnnotatorType.MANUAL_ANNOTATOR);
-		gene.addToIndexes();
+		AnnotatingUtil.annotateGene(aJcas, start, end, content, EnumerationUtils.AnnotatorType.MANUAL_ANNOTATOR);
 	}
 }

@@ -12,8 +12,8 @@
 		<delegateAnalysisEngine key="AE_Result_combine">
 			<import name="UIMA.AnalysisEngines.AnalysisEngine.AE_Result_combine"/>
 		</delegateAnalysisEngine>
-	<delegateAnalysisEngine key="LingpipeAAEDescriptor">
-      <import name="UIMA.AnalysisEngines.LingpipeAAEDescriptor"/>
+	<delegateAnalysisEngine key="AE_Lingpipe_Descriptor">
+      <import name="UIMA.AnalysisEngines.AnalysisEngine.lingpipe.AE_Lingpipe_Descriptor"/>
     </delegateAnalysisEngine>
   </delegateAnalysisEngineSpecifiers>
 	<analysisEngineMetaData>
@@ -25,20 +25,20 @@
 		<configurationParameterSettings/>
 		<flowConstraints>
 			<fixedFlow>
-        <node>AbnerAAEDescriptor</node>
-        <node>ManualAAEDescriptor</node>
-        <node>LingpipeAAEDescriptor</node>
-        <node>AE_Result_combine</node>
+				<node>AbnerAAEDescriptor</node>
+				<node>ManualAAEDescriptor</node>
+				<node>AE_Lingpipe_Descriptor</node>
+			<node>AE_Result_combine</node>
       </fixedFlow>
-    </flowConstraints>
+		</flowConstraints>
 		<typePriorities/>
 		<fsIndexCollection/>
 		<capabilities>
 			<capability>
 				<inputs/>
 				<outputs>
-          <type allAnnotatorFeatures="true">services.uima.types.GeneName</type>
-        </outputs>
+					<type allAnnotatorFeatures="true">services.uima.types.GeneName</type>
+				</outputs>
 				<languagesSupported/>
 			</capability>
 		</capabilities>

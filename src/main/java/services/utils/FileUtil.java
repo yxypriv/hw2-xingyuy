@@ -4,9 +4,11 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
+
 /**
  * A tool class for more easy reading files and process.
  * 
@@ -19,15 +21,12 @@ public class FileUtil {
 	}
 
 	public static void iterateFileByLine(String resourcePath, FileLineProcess process) {
-		URL resource = FileUtil.class.getClassLoader().getResource(resourcePath);
-		String file = resource.getFile();
+		InputStream resource = FileUtil.class.getClassLoader().getResourceAsStream(resourcePath);
 
 		BufferedReader reader = null;
 		try {
-			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "utf-8"));
+			reader = new BufferedReader(new InputStreamReader(resource, "utf-8"));
 		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
-		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
 		String line = null;

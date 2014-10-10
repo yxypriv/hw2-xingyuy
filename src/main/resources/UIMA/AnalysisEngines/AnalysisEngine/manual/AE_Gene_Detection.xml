@@ -20,7 +20,7 @@
 			<nameValuePair>
 				<name>Dictionary</name>
 				<value>
-					<string>/data/zipedGeneNames</string>
+					<string>data/zippedGeneNames</string>
 				</value>
 			</nameValuePair>
 		</configurationParameterSettings>

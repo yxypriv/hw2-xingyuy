@@ -9,6 +9,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import services.utils.AnnotatingUtil;
 import services.utils.EnumerationUtils;
 import services.utils.abner.AbnerUtil;
 import abner.Tagger;
@@ -59,7 +60,7 @@ public class AbnerNoneTokenizeAnnotator extends JCasAnnotator_ImplBase {
 						System.out.println(String.format("%d,%d\t%s", start, end, entities[0][i]));
 						System.out.println(content);
 					}
-					AbnerUtil.annotateGene(aJCas, start, end, entities[0][i], EnumerationUtils.AnnotatorType.ABNER_NONE_TOKENIZE);
+					AnnotatingUtil.annotateGene(aJCas, start, end, content, EnumerationUtils.AnnotatorType.ABNER_NONE_TOKENIZE);
 				}
 			}
 		}

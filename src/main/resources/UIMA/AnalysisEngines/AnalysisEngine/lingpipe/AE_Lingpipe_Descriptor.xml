@@ -19,7 +19,7 @@
       <nameValuePair>
         <name>model_path</name>
         <value>
-          <string>data/lingpipe/ne-en-bio-genetag.HmmChunker</string>
+          <string>/data/lingpipe/ne-en-bio-genetag.HmmChunker</string>
         </value>
       </nameValuePair>
     </configurationParameterSettings>

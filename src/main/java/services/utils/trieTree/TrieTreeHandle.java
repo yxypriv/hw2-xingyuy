@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -45,14 +46,15 @@ public class TrieTreeHandle {
 	// --------------------Singlton-------------------------------------------
 	static Map<String, TrieTreeHandle> instanceMap = new HashMap<String, TrieTreeHandle>();;
 
-	public synchronized static TrieTreeHandle getInstance(String file) {
-		TrieTreeHandle instance = instanceMap.get(file);
+	public synchronized static TrieTreeHandle getInstance(InputStream fileStream, String filePath) {
+//		System.out.println(fileStream);
+		TrieTreeHandle instance = instanceMap.get(filePath);
 		if (null == instance) {
 			instance = new TrieTreeHandle();
-			instance.buildTrieTree(new File(file));
-			instanceMap.put(file, instance);
+			instance.buildTrieTree(fileStream);
+			instanceMap.put(filePath, instance);
 		}
-		return instanceMap.get(file);
+		return instanceMap.get(filePath);
 	}
 
 	// ----------------------------------------------------------------
@@ -172,13 +174,11 @@ public class TrieTreeHandle {
 	 * 
 	 * @param f
 	 */
-	public synchronized void buildTrieTree(File f) {
+	public synchronized void buildTrieTree(InputStream input) {
 		BufferedReader reader = null;
 		try {
-			reader = new BufferedReader(new InputStreamReader(new FileInputStream(f), "utf-8"));
+			reader = new BufferedReader(new InputStreamReader(input, "utf-8"));
 		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
-		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
 		String line = null;
