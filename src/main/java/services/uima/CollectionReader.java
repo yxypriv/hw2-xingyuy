@@ -20,11 +20,11 @@ import org.apache.uima.util.Progress;
 import services.uima.types.DocumentKey;
 
 /**
- * read from <b>InputFile</b>, save in document text
- * Homework2 update: do the first step split and also save key Annotation.
+ * read from <b>InputFile</b>, save in document text Homework2 update: do the
+ * first step split and also save key Annotation.
  * 
  * @author Xingyu
- *
+ * 
  */
 public class CollectionReader extends CollectionReader_ImplBase {
 
@@ -34,11 +34,13 @@ public class CollectionReader extends CollectionReader_ImplBase {
 
 	@Override
 	public void initialize() throws ResourceInitializationException {
-		URL resource = CollectionReader.class.getClassLoader().getResource(((String) getConfigParameterValue(PARAM_INPUT_FILE)).trim());
-//		System.out.println(getConfigParameterValue(PARAM_INPUT_FILE));
-		File f = new File(resource.getFile());
+		String inputFilePath = ((String) getConfigParameterValue(PARAM_INPUT_FILE)).trim();
+
+		// URL resource =
+		// CollectionReader.class.getClassLoader().getResource(inputFilePath);
+		// File f = new File(resource.getFile());
 		try {
-			reader = new BufferedReader(new InputStreamReader(new FileInputStream(f), "utf-8"));
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFilePath), "utf-8"));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
@@ -55,10 +57,10 @@ public class CollectionReader extends CollectionReader_ImplBase {
 		} catch (CASException e) {
 			e.printStackTrace();
 		}
-		
+
 		String[] split = line.split(" +", 2);
 		aCAS.setDocumentText(split[1]);
-//		System.out.println("[reader]" + split[1]);
+		// System.out.println("[reader]" + split[1]);
 		DocumentKey key = null;
 		key = new DocumentKey(jCas);
 		key.setKey(split[0]);
