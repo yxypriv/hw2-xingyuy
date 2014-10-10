@@ -35,7 +35,7 @@ public class CollectionReader extends CollectionReader_ImplBase {
 	@Override
 	public void initialize() throws ResourceInitializationException {
 		String inputFilePath = ((String) getConfigParameterValue(PARAM_INPUT_FILE)).trim();
-
+//		System.out.println(new File(inputFilePath).getAbsolutePath());
 		// URL resource =
 		// CollectionReader.class.getClassLoader().getResource(inputFilePath);
 		// File f = new File(resource.getFile());
@@ -68,6 +68,8 @@ public class CollectionReader extends CollectionReader_ImplBase {
 	}
 
 	public boolean hasNext() throws IOException, CollectionException {
+		if (null == reader)
+			return false;
 		line = reader.readLine();
 		return line != null;
 	}
@@ -77,7 +79,8 @@ public class CollectionReader extends CollectionReader_ImplBase {
 	}
 
 	public void close() throws IOException {
-		reader.close();
+		if (null != reader)
+			reader.close();
 	}
 
 }

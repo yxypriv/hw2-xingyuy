@@ -56,7 +56,7 @@ public class SimpleRunCPE extends Thread {
 		if(args.length >= 1)
 			path = args[0];
 		if(path == null) {
-			URL resource = SimpleRunCPE.class.getResource("/UIMA/CpeDescriptor.xml");
+			URL resource = SimpleRunCPE.class.getResource("CpeDescriptor.xml");
 			path = resource.getFile();
 		}
 		// parse CPE descriptor

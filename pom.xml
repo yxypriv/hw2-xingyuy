@@ -13,6 +13,10 @@
 			<id>oaqa</id>
 			<url>http://mu.lti.cs.cmu.edu:8081/nexus/content/repositories/thirdparty</url>
 		</repository>
+		<repository>
+			<id>oaqa1</id>
+			<url>http://mu.lti.cs.cmu.edu:8081/nexus/content/groups/course/</url>
+		</repository>
 	</repositories>
 	<distributionManagement>
 		<repository>
